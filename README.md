@@ -1,0 +1,1 @@
+# detail7kasim
