@@ -1,0 +1,8 @@
+body{
+   overflow-x: hidden;
+}
+
+.carousel-control-next-icon:after,.carousel-control-prev-icon:after {
+   color: black !important;
+   
+}

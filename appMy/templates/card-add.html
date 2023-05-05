@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block main %}
+
+{% if hata %}
+<div class="alert alert-danger" role="alert" data-mdb-color="danger">
+   {{ hata }}
+</div>
+{% endif %}
+   
+
+<main class="mt-4">
+   <div class="row justify-content-center">
+      <div class="col-6">
+         <h2>Kart Ekle</h2>
+         <form method="POST">
+            {% csrf_token %}
+            <!-- Name input -->
+            <div class="form-outline mb-4">
+               <input type="text" name="title" id="form4Example1" class="form-control" />
+               <label class="form-label" for="form4Example1">Başlık</label>
+            </div>
+         
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+               <label class="form-label" for="form4Example2">Marka</label>
+               <select class="form-select" name="brand" id="">
+                  
+                  {% for i in brands %}
+                  <option value="{{ i.title }}">{{ i.title }}</option>
+                  {% endfor %}
+                     
+               </select>
+            </div>
+         
+            <!-- Message input -->
+            <div class="form-outline mb-4">
+               <textarea class="form-control" name="text" id="form4Example3" rows="4"></textarea>
+               <label class="form-label" for="form4Example3">İçerik</label>
+            </div>
+         
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-success btn-block mb-4">Ekle</button>
+         </form>
+      </div>
+   </div>
+</main>
+{% endblock main %}
+
+   
