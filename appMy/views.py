@@ -61,13 +61,13 @@ def cardAdd(request):
    context = {
        "brands": brands,
    }
+   
    if request.method == "POST":
       title = request.POST.get("title")
       brand = request.POST.get("brand")
       text = request.POST.get("text")
 
       if not (title.strip(" ") == "" or text.strip(" ") == ""):
-         print("GİRDİ")
          brandget = Brand.objects.filter(title=brand)
 
          if brandget.exists():
@@ -127,11 +127,11 @@ def registerUser(request):
       password2 = request.POST.get("password2")
       
       # PASWORD START
+      
       upp = False
       numm = False
-      for i in password1:
-         print(i)
-         if i == i.upper():
+      for i in password1: # "123" == "123".upper()
+         if i == i.upper() and not i.isdecimal():
             upp = True
          if i.isdecimal():
             numm = True
@@ -215,7 +215,6 @@ def profileUser(request):
             # PASWORD END
             if password1 == password2 and upp and numm and len(password1)>=6: # yeni şifreler
                user.set_password(password1)
-               print(password1)
                user.save()
                # login(request, user)
                return redirect("loginUser")
@@ -238,7 +237,8 @@ def profileUser(request):
          profile.job = job
          profile.address = address
          profile.tel = tel
-         profile.image = image
+         if image is not None:
+            profile.image = image
          profile.save()
          
          # NAME START

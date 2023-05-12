@@ -27,9 +27,13 @@
                <li class="nav-item">
                   <a class="nav-link" href="/category/all/">Kategori</a>
                </li>
+               
+               {% if request.user.is_authenticated %}
                <li class="nav-item">
                   <a class="nav-link btn btn-success" href="{% url 'cardAdd' %}">Kart Ekle</a>
                </li>
+               {% endif %}
+                  
             </ul>
             <!-- Left links -->
          </div>
@@ -43,12 +47,12 @@
                <!-- Login Profil -->
                <div class="d-flex">
                   <!-- Icon -->
-                  <a class="text-reset me-3" href="#">
+                  <a class="text-reset me-3 d-flex align-items-center justify-content-center" href="#">
                      <i class="fas fa-shopping-cart"></i>
                   </a>
                
                   <!-- Notifications -->
-                  <div class="dropdown">
+                  <div class="dropdown d-flex align-items-center justify-content-center">
                      <a class="text-reset me-3 dropdown-toggle hidden-arrow" href="#" id="navbarDropdownMenuLink" role="button"
                         data-mdb-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-bell"></i>
@@ -70,8 +74,17 @@
                   <div class="dropdown">
                      <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar"
                         role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" height="25"
+                        
+                        {% if profile.image %}
+                        <img src="{{ profile.image.url }}" class="rounded-circle" style="object-fit: cover;" height="40" width="40"
                            alt="Black and White Portrait of a Man" loading="lazy" />
+                           
+                        {% else %}
+                           <img src="{% static 'img/profile.png' %}" class="rounded-circle" style="object-fit: cover;" height="40" width="40"
+                              alt="Black and White Portrait of a Man" loading="lazy" />
+                           
+                        {% endif %}
+                           
                      </a>
                      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
                         <li>
